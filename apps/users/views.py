@@ -13,12 +13,9 @@ from django.contrib.auth.backends import BaseBackend
 
 def login_user(request):
     if request.method == 'POST':
-        username = request.POST['username']
+        username = request.POST['username'] + '@psi-group.kz'
         password = request.POST['password']
-        print('auth')
         user = authenticate(username=username, password=password)
-        print(user)
-        #user = UserBackend.authenticate(BaseBackend(), request, username=username, password=password)
         if user is not None:
             print('login')
             login(request, user)

@@ -30,13 +30,13 @@ class Command(BaseCommand):
         def create_user(bot, event):
             if event.from_chat[-13:] == '@psi-group.kz':
                 User = get_user_model()
-                #print(User)
+
                 try:
-                #if get_db_handle()['users'].count_documents({'email': event.from_chat}) > 0:
-                    user = User.objects.get(username=event.from_chat[:-13])
+                    user = User.objects.get(username=event.from_chat)
                     bot.send_text(chat_id=event.from_chat, text='Вы уже получали первичный пароль!')
+                
                 except:
-                #else:
+
                     letters = string.ascii_letters
                     digits = string.digits
                     alphabet = letters + digits
@@ -44,30 +44,9 @@ class Command(BaseCommand):
                     pwd = ''
                     for i in range(pwd_length):
                         pwd += ''.join(secrets.choice(alphabet))
-                    ########
-                    print(1)
-                    #from ...models import CustomUser
-                    #from ...models import CustomUserManager
 
-                    #user = CustomUserManager.create_user(email=event.from_chat, password=pwd, first_name='fn', last_name='ln')
-                    
-                    #CustomUserManager.create_user(email=event.from_chat, password='123456789')
-                    print(2)
-                    """
-                    col = get_db_handle()['users']
-                    val = {
-                        'email': event.from_chat,
-                        'password': '123456789',
-                        'first_name': 'firstname',
-                        'last_name': 'lastname',
-                        }
-                    col.insert_one(val)
-                    """
-                    user = User.objects.create_user(username=event.from_chat, password=pwd, first_name='fn', last_name='ln')
-                    print(user)
+                    user = User.objects.create_user(username=event.from_chat, password=pwd, first_name=event.message_author['firstName'], last_name=event.message_author['lastName'])
                     user.save()
-
-                    
 
                     bot.send_text(chat_id=event.from_chat, text='Поздравляем! Ваша учетная запись успешно создана. Ваш пароль для входа на сайт: \n\n{}'.format(pwd))
                     bot.send_text(chat_id=event.from_chat, text='Сайт доступен по ссылке: \nhttp://192.168.1.33:8000')
