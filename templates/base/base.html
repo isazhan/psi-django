@@ -18,9 +18,11 @@
             {% include '../include/main-left.html' %}
         </div>
     
-        <div class="col-sm">            
-            {% block content %}
-            {% endblock content %}
+        <div class="col-sm">
+            <div class="card p-4 rounded-3 text-white mb-5" style="background-color: #21262D;">
+                {% block content %}
+                {% endblock content %}
+            </div>
         </div>
     
         </div>

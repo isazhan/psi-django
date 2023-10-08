@@ -14,5 +14,5 @@ urlpatterns = [
     path('all_applications/', views.all_applications, name='all_applications'),
     path('delete_application/<int:application_id>/', views.delete_application, name='delete_application'),
     path('download_application/<int:application_id>/', views.download_application, name='download_application'),
-
+    #path('permission_manage', views.permission_manage, name='permission_manage'),
 ]

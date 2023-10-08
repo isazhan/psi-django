@@ -3,10 +3,12 @@
 {% block content %}
 {% load static %}
 
+{% if request.user.username == 'u.isazhan@psi-group.kz' %}
+<a type="button" class="btn btn-success" href="{% url 'create_project' %}">Создать проект</a>
+{% endif %}
 
 {% for x in projects %}
-
-    <div class="card p-4 rounded-3 text-white mb-5" style="background-color: #21262D;">
+    
         <div class="card-tittle row" >
             <div class="col-sm">
                 <h4>{{ x.number }} - {{ x.name }} </h4>
@@ -37,11 +39,6 @@
             </div>
 
         </div>
-
-    
-
-
-    </div>
 
 {% endfor %}
 {% endblock content %}

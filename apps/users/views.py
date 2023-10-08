@@ -208,6 +208,17 @@ def download_application(request, application_id):
    # doc.save('application_output.docx')
 
    # return redirect(all_applications)
+"""
+from db import get_db_handle as db
+def permission_manage(request):
+    if 'permissions' not in db().list_collection_names():
+        print('yes')
+        col = db()['permissions']
+    #context = {
+    #    'projects': projects,
+    #}
 
+    template = loader.get_template('main/index.html')
 
-
+    return HttpResponse(template.render(context, request))
+"""
