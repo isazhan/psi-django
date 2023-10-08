@@ -8,12 +8,13 @@ from apps.main.decorators import permission_required
 
 @login_required
 def index(request):
-    projects = Projects.objects.all()
-
+    col = db()['projects']
+    projects = col.find({}, {'_id': 0, 'project_number': 1, 'project_name': 1})
+    
     context = {
         'projects': projects,
     }
-    
+
     template = loader.get_template('main/index.html')
     return HttpResponse(template.render(context, request))
 
@@ -30,3 +31,8 @@ def create_project(request):
         return index(request)
     else:
         return render(request, 'main/create_project.html')
+    
+
+def project(request, project_number):
+    print(project_number)
+    return render(request, 'main/project.html')
